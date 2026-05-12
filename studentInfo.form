@@ -1,0 +1,371 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ */
+package com.mycompany.mscarter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import javax.swing.*;
+/**
+ *
+ * @author Dell Inspiron 14
+ */
+public class FinalGrades extends javax.swing.JFrame {
+
+    /**
+     * Creates new form FinalGrades
+     */
+    public FinalGrades() {
+        initComponents();
+    }
+    private boolean final_1=false;
+    private boolean final_2=false;
+    private boolean final_3=false;
+    private boolean final_4=false;
+    private boolean final_5=false;
+    private void grades_1(){
+        if (final_1) return;
+        DefaultListModel<String> model = new DefaultListModel<>();
+    model.clear();
+    try {
+    Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/ms.carter_db",
+        "root",
+        "password"
+    );
+
+    String sql = "SELECT first_name, last_name, SUM(category_weighted_score) AS final_grade FROM (SELECT s.student_id, s.first_name, s.last_name, gc.category_name, (SUM(g.points_earned) / SUM(a.max_points)) * (gc.weight_percentage/100) AS category_weighted_score FROM grade_category gc JOIN assignment a ON gc.category_id = a.category_id JOIN submission sub ON a.assignment_id = sub.assignment_id JOIN grades g ON sub.submission_id = g.submission_id JOIN students s ON sub.student_id = s.student_id JOIN student_class sc ON sc.student_id= s.student_id WHERE sc.class_id=1 GROUP BY s.student_id, s.first_name, s.last_name, gc.category_name, gc.weight_percentage) AS category_scores GROUP BY student_id, first_name, last_name";
+    PreparedStatement pst = con.prepareStatement(sql);
+    ResultSet rs = pst.executeQuery();
+
+    while (rs.next()) {
+        double finalGrade1 = rs.getDouble("final_grade") * 100;
+        String fgrade = rs.getString("first_name") + " " + rs.getString("last_name")+" "+ String.format("%.2f", finalGrade1) ;
+        model.addElement(fgrade);
+        
+    }
+    jList1.setModel(model);
+    final_1=true;
+    
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
+        
+    }
+    private void grades_2(){
+        if (final_2) return;
+        DefaultListModel<String> model = new DefaultListModel<>();
+    model.clear();
+    try {
+    Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/ms.carter_db",
+        "root",
+        "password"
+    );
+
+    String sql = "SELECT first_name, last_name, SUM(category_weighted_score) AS final_grade FROM (SELECT s.student_id, s.first_name, s.last_name, gc.category_name, (SUM(g.points_earned) / SUM(a.max_points)) * (gc.weight_percentage/100) AS category_weighted_score FROM grade_category gc JOIN assignment a ON gc.category_id = a.category_id JOIN submission sub ON a.assignment_id = sub.assignment_id JOIN grades g ON sub.submission_id = g.submission_id JOIN students s ON sub.student_id = s.student_id JOIN student_class sc ON sc.student_id= s.student_id WHERE sc.class_id=2 GROUP BY s.student_id, s.first_name, s.last_name, gc.category_name, gc.weight_percentage) AS category_scores GROUP BY student_id, first_name, last_name";
+    PreparedStatement pst = con.prepareStatement(sql);
+    ResultSet rs = pst.executeQuery();
+
+    while (rs.next()) {
+        double finalGrade1 = rs.getDouble("final_grade") * 100;
+        String fgrade = rs.getString("first_name") + " " + rs.getString("last_name")+" "+ String.format("%.2f", finalGrade1) ;
+        model.addElement(fgrade);
+        
+    }
+    jList2.setModel(model);
+    final_2=true;
+    
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
+        
+    }
+    private void grades_3(){
+        if (final_3) return;
+        DefaultListModel<String> model = new DefaultListModel<>();
+    model.clear();
+    try {
+    Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/ms.carter_db",
+        "root",
+        "password"
+    );
+
+    String sql = "SELECT first_name, last_name, SUM(category_weighted_score) AS final_grade FROM (SELECT s.student_id, s.first_name, s.last_name, gc.category_name, (SUM(g.points_earned) / SUM(a.max_points)) * (gc.weight_percentage/100) AS category_weighted_score FROM grade_category gc JOIN assignment a ON gc.category_id = a.category_id JOIN submission sub ON a.assignment_id = sub.assignment_id JOIN grades g ON sub.submission_id = g.submission_id JOIN students s ON sub.student_id = s.student_id JOIN student_class sc ON sc.student_id= s.student_id WHERE sc.class_id=3 GROUP BY s.student_id, s.first_name, s.last_name, gc.category_name, gc.weight_percentage) AS category_scores GROUP BY student_id, first_name, last_name";
+    PreparedStatement pst = con.prepareStatement(sql);
+    ResultSet rs = pst.executeQuery();
+
+    while (rs.next()) {
+        double finalGrade1 = rs.getDouble("final_grade") * 100;
+        String fgrade = rs.getString("first_name") + " " + rs.getString("last_name")+" "+ String.format("%.2f", finalGrade1) ;
+        model.addElement(fgrade);
+        
+    }
+    jList3.setModel(model);
+    final_3=true;
+    
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
+        
+    }
+    private void grades_4(){
+        if (final_4) return;
+        DefaultListModel<String> model = new DefaultListModel<>();
+    model.clear();
+    try {
+    Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/ms.carter_db",
+        "root",
+        "password"
+    );
+
+    String sql = "SELECT first_name, last_name, SUM(category_weighted_score) AS final_grade FROM (SELECT s.student_id, s.first_name, s.last_name, gc.category_name, (SUM(g.points_earned) / SUM(a.max_points)) * (gc.weight_percentage/100) AS category_weighted_score FROM grade_category gc JOIN assignment a ON gc.category_id = a.category_id JOIN submission sub ON a.assignment_id = sub.assignment_id JOIN grades g ON sub.submission_id = g.submission_id JOIN students s ON sub.student_id = s.student_id JOIN student_class sc ON sc.student_id= s.student_id WHERE sc.class_id=4 GROUP BY s.student_id, s.first_name, s.last_name, gc.category_name, gc.weight_percentage) AS category_scores GROUP BY student_id, first_name, last_name";
+    PreparedStatement pst = con.prepareStatement(sql);
+    ResultSet rs = pst.executeQuery();
+
+    while (rs.next()) {
+        double finalGrade1 = rs.getDouble("final_grade") * 100;
+        String fgrade = rs.getString("first_name") + " " + rs.getString("last_name")+" "+ String.format("%.2f", finalGrade1) ;
+        model.addElement(fgrade);
+        
+    }
+    jList4.setModel(model);
+    final_4=true;
+    
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
+        
+    }
+    private void grades_5(){
+        if (final_5) return;
+        DefaultListModel<String> model = new DefaultListModel<>();
+    model.clear();
+    try {
+    Connection con = DriverManager.getConnection(
+        "jdbc:mysql://localhost:3306/ms.carter_db",
+        "root",
+        "password"
+    );
+
+    String sql = "SELECT first_name, last_name, SUM(category_weighted_score) AS final_grade FROM (SELECT s.student_id, s.first_name, s.last_name, gc.category_name, (SUM(g.points_earned) / SUM(a.max_points)) * (gc.weight_percentage/100) AS category_weighted_score FROM grade_category gc JOIN assignment a ON gc.category_id = a.category_id JOIN submission sub ON a.assignment_id = sub.assignment_id JOIN grades g ON sub.submission_id = g.submission_id JOIN students s ON sub.student_id = s.student_id JOIN student_class sc ON sc.student_id= s.student_id WHERE sc.class_id=5 GROUP BY s.student_id, s.first_name, s.last_name, gc.category_name, gc.weight_percentage) AS category_scores GROUP BY student_id, first_name, last_name";
+    PreparedStatement pst = con.prepareStatement(sql);
+    ResultSet rs = pst.executeQuery();
+
+    while (rs.next()) {
+        double finalGrade1 = rs.getDouble("final_grade") * 100;
+        String fgrade = rs.getString("first_name") + " " + rs.getString("last_name")+" "+ String.format("%.2f", finalGrade1) ;
+        model.addElement(fgrade);
+        
+    }
+    jList5.setModel(model);
+    final_5=true;
+    
+
+} catch (Exception e) {
+    e.printStackTrace();
+}
+        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jList3 = new javax.swing.JList<>();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jList4 = new javax.swing.JList<>();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jList5 = new javax.swing.JList<>();
+        jLabel1 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
+            }
+        });
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jTabbedPane1.addTab("Class 1", jScrollPane1);
+
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
+
+        jTabbedPane1.addTab("Class 2", jScrollPane2);
+
+        jList3.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane3.setViewportView(jList3);
+
+        jTabbedPane1.addTab("Class 3", jScrollPane3);
+
+        jList4.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane4.setViewportView(jList4);
+
+        jTabbedPane1.addTab("Class 4", jScrollPane4);
+
+        jList5.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane5.setViewportView(jList5);
+
+        jTabbedPane1.addTab("Class 5", jScrollPane5);
+
+        jLabel1.setText("Final Grades");
+
+        jButton1.setText("Close");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(139, 139, 139)
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(121, 121, 121)
+                        .addComponent(jButton1)))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabel1)
+                .addGap(47, 47, 47)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton1)
+                .addContainerGap(12, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
+        // TODO add your handling code here:
+         if (jTabbedPane1.getSelectedComponent() == jScrollPane1) {
+    grades_1();
+}
+        if (jTabbedPane1.getSelectedComponent() == jScrollPane2) {
+    grades_2();
+}
+        if (jTabbedPane1.getSelectedComponent() == jScrollPane3) {
+    grades_3();
+}
+
+        if (jTabbedPane1.getSelectedComponent() == jScrollPane4) {
+    grades_4();
+}
+        if (jTabbedPane1.getSelectedComponent() == jScrollPane5) {
+    grades_5();
+}
+    }//GEN-LAST:event_jTabbedPane1StateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(FinalGrades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(FinalGrades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(FinalGrades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(FinalGrades.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new FinalGrades().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<String> jList3;
+    private javax.swing.JList<String> jList4;
+    private javax.swing.JList<String> jList5;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    // End of variables declaration//GEN-END:variables
+}
